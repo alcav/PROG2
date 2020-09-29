@@ -1,3 +1,3 @@
 Hier entsteht meine Projektarbeit fürs PROG2.
 
-![Flowchart](https://app.diagrams.net/#G1Pj9s-kEZHjTxqApzEABGqHXKv-Wlk6iK)
+![Borat](https://eserioblog.files.wordpress.com/2014/02/borat.jpg)
