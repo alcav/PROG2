@@ -7,6 +7,18 @@
 		{% block title %}{% endblock %}
 	</head>
 	<body>
-		{% block body %}{% endblock %}
+
+	<div class="header">
+	  <p>Time Tool</p>
+	  <div class="header-right">
+		<a href="/">Home</a>
+		<a href="uebersicht">Übersicht</a>                  <!-- hrefs noch anpassen -->
+		<a href="grafiken">Grafiken</a>
+	  </div>
+	</div>
+
+	<!-- Quelle Header: https://www.w3schools.com/howto/howto_css_responsive_header.asp -->
+
+	{% block body %}{% endblock %}
 	</body>
 </html>

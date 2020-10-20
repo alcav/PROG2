@@ -7,7 +7,6 @@ table, td, th {
 }
 
 
-
 /* Quelle Header: https://www.w3schools.com/howto/howto_css_responsive_header.asp */
 
 /* Style the header with a grey background and some padding */
@@ -31,7 +30,7 @@ table, td, th {
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 25px;
+  font-size: 50px;
   font-weight: bold;
 }
 
