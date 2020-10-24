@@ -1,12 +1,16 @@
 import json
 
 
-def eingabe_speichern(datum, aufgabe, anfangszeit, endzeit, pause):
+def eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
     try:
-        with open("zeiterfassung.txt", "r") as open_file:
+        with open("zeiterfassung.json") as open_file:  # Wenn Datei "zeiterfassung.json" vorhanden, wird sie geöffnet.
             zeiterfassung = json.load(open_file)
 
-    except FileNotFoundError:
-        zeiterfassung = []
+    except FileNotFoundError:  # Wenn noch keine Datei "zeiterfassung.json" vorhanden, wird ein neues Dict erstellt.
+        zeiterfassung = {}
 
-    datum = ('aufgabe', 'anfangszeit', 'endzeit', 'pause')  # Das ist ein Tuple = eine unveränderbare Liste.
+    zeiterfassung[datum] = aufgabe, startzeit, endzeit, pause
+
+    with open("zeiterfassung.json", "w") as open_file:  # Die Eingaben werden im Dict abgespeichert.
+        json.dump(zeiterfassung, open_file)  # json.dump() function converts a Python object into a json string.
+

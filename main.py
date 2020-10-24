@@ -8,17 +8,14 @@ app = Flask("TimeTool")
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
-    if request_method == 'POST':
-        datum = request.form['datum']
+    if request.method == 'POST': #Wenn User etwas im Formular eingibt.
+        datum = request.form['datum'] #Eingaben werden zu Variablen.
         aufgabe = request.form['aufgabe']
         startzeit = request.form['startzeit']
         endzeit = request.form['endzeit']
         pause = request.form['pause']
-        funktionen.eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
+        funktionen.eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause) #Funktion wird ausgeführt.
     return render_template('index.html')
-
-# Hier wird eine Funktion ausgeführt, die in den Funktionen definiert wird.........
-# Damit sollen die Einträge als dict in json abgespeichert werden können .........
 
 
 @app.route('/uebersicht')
