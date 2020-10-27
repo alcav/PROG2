@@ -1,4 +1,5 @@
 import json
+from datetime import time
 
 
 def eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
@@ -6,7 +7,7 @@ def eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
         with open("zeiterfassung.json") as open_file:  # Wenn Datei "zeiterfassung.json" vorhanden, wird sie geöffnet.
             zeiterfassung = json.load(open_file)
 
-    except FileNotFoundError:  # Wenn noch keine Datei "zeiterfassung.json" vorhanden, wird ein neues Dict erstellt.
+    except FileNotFoundError:  # Wenn noch keine Datei "zeiterfassung.json" vorhanden, wird ein leeres Dict erstellt.
         zeiterfassung = {}
 
     zeiterfassung[datum] = aufgabe, startzeit, endzeit, pause

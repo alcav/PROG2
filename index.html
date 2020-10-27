@@ -6,21 +6,33 @@
 
 {% block body %}
 
-<h1>Zeiterfassung</h1>
+<h2>Zeiterfassung</h2>
 
 <div>
-
 	<form method="POST">
-		<input type="date" name="datum" placeholder="Datum">
-		<input type="text" name="aufgabe" placeholder="Aufgabe">
-		<input type="time" name="startzeit" placeholder="Startzeit">
-		<input type="time" name="endzeit" placeholder="Endzeit">
-		<input type="number" min="0" step="0.25" name="pause" placeholder="Pause (in Std.)">
+		<label>Datum</label><input type="date" name="datum" placeholder="Datum">
+		<label>Startzeit</label><input type="time" name="startzeit" placeholder="Startzeit">
+		<label>Endzeit</label><input type="time" name="endzeit" placeholder="Endzeit">
+		<label>Pause</label><input type="number" min="0" step="0.25" name="pause" placeholder="Pause (in Std.)"><br>
+		<input type="checkbox" id="isolation" name="aufgabe" value="isolation">
+			<label for="isolation"> Isolation</label><br>
+		<input type="checkbox" id="wandtaeferung" name="aufgabe" value="wandtaeferung">
+  			<label for="wandtaeferung"> Wandtäferung</label><br>
+		<input type="checkbox" id="fenster" name="aufgabe" value="fenster">
+  			<label for="fenster"> Fenster</label><br>
+    	<input type="checkbox" id="moebelbau" name="aufgabe" value="moebelbau">
+  			<label for="moebelbau">Möbelbau</label><br>
+		<input type="checkbox" id="kueche" name="aufgabe" value="kueche">
+  			<label for="kueche"> Küche</label><br>
+    	<input type="checkbox" id="bad" name="aufgabe" value="bad">
+  			<label for="bad"> Bad</label><br>
+		<input type="checkbox" id="sonstiges" name="aufgabe" value="sonstiges">
+  			<label for="sonstiges"> Sonstiges</label><br>
 		<button type="submit">Hinzufügen</button>
 	</form>
-
 </div>
 
-
 {% endblock %}
+
+<!-- Quelle Formular: https://www.w3schools.com/html/html_form_input_types.asp -->
 

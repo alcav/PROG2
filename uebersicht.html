@@ -6,32 +6,31 @@
 
 {% block body %}
 
-<h1>Übersicht erfasste Zeit</h1>
+<h2>Übersicht erfasste Zeit</h2>
 
-<div>
+<main role="main">
+	{% if zeit %} <!-- Falls Zeiten bereits erfasst wurden -->
+	<div class="container">
+      <div class="row">
+         <div class="col">
+            <div class="list-group">
+               {% for key, value in zeit.items() %}
+                  {{ key }}, {{ value }} <br>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
+   </div>
 
-	<table>
-		<tr>
-			<th>Datum</th>
-			<th>Aufgabe</th>
-			<th>Anz. Stunden</th>
-			<th>Anpassen</th>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td>
-				<a href="">Löschen</a>  <!-- Achtung Links fehlen noch -->
-				<a href="">Ändern</a>
-			</td>
-		</tr>
-	</table>
+   {% else %}
+	<!-- Falls noch keine Zeiten erfasst wurden -->
+	<div class="container">
+		<div class="row">
+			<p>Es wurden noch keine Zeiten erfasst. Erfassen Sie Ihre Zeit <a href="/">hier</a>.</p>
+		</div>
+	</div>
+</main>
 
-<!-- Quelle: https://www.youtube.com/watch?v=Z1RJmh_OqeA&t=1534s -->
-
-</div>
-
-
+	{% endif %}
 
 {% endblock %}

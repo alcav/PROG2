@@ -19,19 +19,10 @@ def speichern():
 
 
 @app.route('/uebersicht')
-def auflisten():
-    erfasste_zeit = funktionen.erfasste_zeit_laden()
+def uebersicht():
+    zeiterfassung = funktionen.erfasste_zeit_laden()
 
-    zeiterfassung_liste = ""
-    for key, value in erfasste_zeit.items():
-        zeile = str(key) + ": " + str(value) + "<br>"
-        zeiterfassung_liste += zeile
-
-    return zeiterfassung_liste
-
-
-# def uebersicht():
-    # return render_template('uebersicht.html')
+    return render_template('uebersicht.html', zeit = zeiterfassung)
 
 
 @app.route('/grafiken')
