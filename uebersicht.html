@@ -8,29 +8,32 @@
 
 <h2>Übersicht erfasste Zeit</h2>
 
-<main role="main">
-	{% if zeit %} <!-- Falls Zeiten bereits erfasst wurden -->
-	<div class="container">
-      <div class="row">
-         <div class="col">
-            <div class="list-group">
-               {% for key, value in zeit.items() %}
-                  {{ key }}, {{ value }} <br>
-               {% endfor %}
-            </div>
-         </div>
-      </div>
-   </div>
+{% if zeit %} <!-- Falls Zeiten bereits erfasst wurden -->
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th scope="col">Datum</th>
+        <th scope="col">Aufgabe</th>
+        <th scope="col">Zeit</th>
+        <th scope="col">Anpassen</th>
+    </tr>
+    </thead>
+    {% for key, value in zeit.items() %}
+    <tbody>
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ value[0] }}</td>
+        <td></td> <!-- Die Berechnung fehlt noch. -->
+        <td><a href="">Ändern</a> <a href="">Löschen</a></td> <!-- fehlt noch -->
+    </tr>
+    </tbody>
+    {% endfor %}
+    </table>
 
-   {% else %}
+{% else %}
 	<!-- Falls noch keine Zeiten erfasst wurden -->
-	<div class="container">
-		<div class="row">
-			<p>Es wurden noch keine Zeiten erfasst. Erfassen Sie Ihre Zeit <a href="/">hier</a>.</p>
-		</div>
-	</div>
-</main>
+    <p>Es wurden noch keine Zeiten erfasst. Erfassen Sie Ihre Zeit <a href="/">hier</a>.</p>
 
-	{% endif %}
+{% endif %}
 
 {% endblock %}
