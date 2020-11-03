@@ -10,10 +10,10 @@
 
 <div>
 	<form method="POST">
-		<label>Datum</label><input type="date" name="datum" placeholder="Datum">
+		<label>Datum</label><input type="date" name="datum" placeholder="Datum"> <!-- value="{{ Datum }}" -->
 		<label>Startzeit</label><input type="time" name="startzeit" placeholder="Startzeit">
 		<label>Endzeit</label><input type="time" name="endzeit" placeholder="Endzeit">
-		<label>Pause</label><input type="number" min="0" step="0.25" name="pause" placeholder="Pause (in Std.)"><br>
+		<label>Pause in Min.</label><input type="number" min="0" step="1" name="pause" placeholder="20"><br>
 		<input type="checkbox" id="isolation" name="aufgabe" value="Isolation">
 			<label for="isolation"> Isolation</label><br>
 		<input type="checkbox" id="wandtaeferung" name="aufgabe" value="Wandtäferung">

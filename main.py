@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import json
 import funktionen
 
 
@@ -8,13 +7,13 @@ app = Flask("TimeTool")
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
-    if request.method == 'POST': #Wenn User etwas im Formular eingibt.
-        datum = request.form['datum'] #Eingaben werden zu Variablen.
+    if request.method == 'POST': # Wenn User etwas im Formular eingibt.
+        datum = request.form['datum'] # Eingaben werden zu Variablen.
         aufgabe = request.form['aufgabe']
         startzeit = request.form['startzeit']
         endzeit = request.form['endzeit']
         pause = request.form['pause']
-        funktionen.eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause) #Funktion wird ausgeführt.
+        funktionen.eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause) # Funktion wird ausgeführt.
     return render_template('index.html')
 
 
