@@ -30,7 +30,7 @@ def grafiken():
 
 @app.route('/loeschen')
 def loeschen():
-    return("löschen")
+    return render_template('loeschen.html')
 
 
 if __name__ == "__main__":
