@@ -20,13 +20,17 @@ def speichern():
 @app.route('/uebersicht')
 def uebersicht():
     zeiterfassung = funktionen.erfasste_zeit_laden()
-
     return render_template('uebersicht.html', zeit = zeiterfassung)
 
 
 @app.route('/grafiken')
 def grafiken():
     return render_template('grafiken.html')
+
+
+@app.route('/loeschen')
+def loeschen():
+    return("löschen")
 
 
 if __name__ == "__main__":

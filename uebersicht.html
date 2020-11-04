@@ -23,8 +23,8 @@
     <tr>
         <td>{{ key }}</td>
         <td>{{ value[0] }}</td>
-        <td></td> <!-- Die Berechnung fehlt noch. -->
-        <td><a href="">Ändern</a> <a href="">Löschen</a></td> <!-- fehlt noch -->
+        <td>{{ value[1] }}</td>
+        <td><a href="">Ändern</a> <a href="/loeschen/{{ key }}">Löschen</a></td> <!-- fehlt noch -->
     </tr>
     </tbody>
     {% endfor %}
