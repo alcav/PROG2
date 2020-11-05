@@ -13,14 +13,14 @@ def speichern():
         startzeit = request.form['startzeit']
         endzeit = request.form['endzeit']
         pause = request.form['pause']
-        funktionen.eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause) # Funktion wird ausgeführt.
+        funktionen.neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
     return render_template('index.html')
 
 
 @app.route('/uebersicht')
 def uebersicht():
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeit = zeiterfassung)
+    return render_template('uebersicht.html', zeiterfassung = zeiterfassung)
 
 
 @app.route('/grafiken')
@@ -29,8 +29,15 @@ def grafiken():
 
 
 @app.route('/loeschen')
-def loeschen():
-    return render_template('loeschen.html')
+@app.route('/loeschen/<key>')
+def loeschen(key=False):
+    if key:
+        zeiterfassung = funktionen.erfasste_zeit_laden()
+        del zeiterfassung[key]
+        funktionen.zeiterfassung_abspeichern(zeiterfassung)
+        return render_template('uebersicht.html', zeiterfassung = zeiterfassung)
+    else:
+        return render_template('uebersicht.html')
 
 
 if __name__ == "__main__":

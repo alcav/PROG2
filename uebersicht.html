@@ -8,7 +8,7 @@
 
 <h2>Übersicht erfasste Zeit</h2>
 
-{% if zeit %} <!-- Falls Zeiten bereits erfasst wurden -->
+{% if zeiterfassung %} <!-- Falls Zeiten bereits erfasst wurden -->
 <table class="table table-sm">
     <thead>
     <tr>
@@ -18,7 +18,7 @@
         <th scope="col">Anpassen</th>
     </tr>
     </thead>
-    {% for key, value in zeit.items() %}
+    {% for key, value in zeiterfassung.items() %}
     <tbody>
     <tr>
         <td>{{ key }}</td>
