@@ -1,26 +1,28 @@
 from flask import Flask, render_template, request
 import funktionen
 
-
 app = Flask("TimeTool")
 
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
-    if request.method == 'POST': # Wenn User etwas im Formular eingibt.
-        datum = request.form['datum'] # Eingaben werden zu Variablen.
-        aufgabe = request.form['aufgabe']
-        startzeit = request.form['startzeit']
-        endzeit = request.form['endzeit']
-        pause = request.form['pause']
-        funktionen.neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
+    try:
+        if request.method == 'POST':  # Wenn User etwas im Formular eingibt.
+            datum = request.form['datum']  # Eingaben werden zu Variablen.
+            aufgabe = request.form['aufgabe']
+            startzeit = request.form['startzeit']
+            endzeit = request.form['endzeit']
+            pause = request.form['pause']
+            funktionen.neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
+    except:
+        print("Sie müssen zuerst etwas eingeben...")
     return render_template('index.html')
 
 
 @app.route('/uebersicht')
 def uebersicht():
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeiterfassung = zeiterfassung)
+    return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
 
 
 @app.route('/grafiken')
@@ -35,7 +37,7 @@ def loeschen(key=False):
         zeiterfassung = funktionen.erfasste_zeit_laden()
         del zeiterfassung[key]
         funktionen.zeiterfassung_abspeichern(zeiterfassung)
-        return render_template('uebersicht.html', zeiterfassung = zeiterfassung)
+        return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
     else:
         return render_template('uebersicht.html')
 
