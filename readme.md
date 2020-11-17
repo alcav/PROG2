@@ -12,9 +12,9 @@ Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden.
 ## Funktionsbeschrieb
 
 ### Startseite (Zeiterfassung)
-- Das Formular soll mittels Datum, Startzeit, Endzeit, Pause in Minuten und Auswahl einer Checkbox ausgefüllt werden können.
-- Falls ein Feld nicht ausgefüllt wird, soll beim Klicken auf den Button "Hinzufügen" EINE FEHLERMELDUNG ERSCHEINEN, DA SÄMTLICHE FELDER FÜR DIE ERFASSUNG AUSGEFÜLLT WERDEN MÜSSEN.
-- Wenn alle Daten korrekt erfasst wurden und auf dem Button "Hinzufügen" geklickt wurde, soll eine BESTÄTIGUNG ERSCHEINEN, DASS DIE DATEN GESPEICHERT WURDEN. Danach soll der User auf die Seite Zeiterfassung verbleiben. Das Formular soll wieder leer sein, sodass der Nutzer eine neue Zeiterfassung machen kann. 
+- Das Formular soll mittels Datum, Startzeit, Endzeit, Pause in Minuten und Auswahl einer Aufgabe ausgefüllt werden können. Bei den Aufgaben ist "Sonstiges" bereits vorgewählt. Es soll pro Zeiterfassung nur eine Aufgabe gewählt werden können.
+- Falls ein Feld nicht ausgefüllt wird, soll beim Klicken auf den Button "Hinzufügen" eine Meldung erscheinen, die den Nutzer dazu auffordert, dieses Feld auszufüllen.
+- Wenn alle Daten korrekt erfasst wurden und auf dem Button "Hinzufügen" geklickt wurde, soll eine Bestätigung erscheinen, dass der Eintrag gespeichert wurde. Danach soll der User auf die Seite Zeiterfassung verbleiben. Das Formular soll wieder leer sein, sodass der Nutzer eine neue Zeiterfassung machen kann. 
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung verbleiben.
 - Durch das Klicken auf den Button "Zeiterfassung" soll der User auf die Seite Zeiterfassung verbleiben.
 - Durch das Klicken auf den Button "Übersicht" soll der User auf die Seite Übersicht weitergeleitet werden. 
@@ -22,6 +22,7 @@ Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden.
 
 ### Seite Übersicht
 - Die Übersicht soll alle bereits erfassten Daten darstellen. Für jede Zeiterfassung wird das Datum, die Erfassungzeit, die Aufgabe und die Arbeitszeit angezeigt. Die Arbeitszeit soll die totale Arbeitszeit pro Zeiterfassung sein, d.h. Endzeit abzgl. Anfangszeit abzgl. Pause. Die Arbeitszeit soll in Stunden und Minuten dargestellt werden.
+- Falls noch keine Zeiten erfasst wurden, erscheint eine entsprechende Meldung mit der Aufforderung, die Zeit auf der Seite Zeiterfassung einzugeben.
 - Es soll es dem User möglich sein, durch das Klicken auf den Button "Löschen" bereits erfasste Daten zu löschen UND DURCH DAS KLICKEN AUF DEN BUTTON "ÄNDERN" BEREITS ERFASSTE DATEN ZU ÄNDERN.
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung weitergeleitet werden.
 - Durch das Klicken auf den Button "Zeiterfassung" soll der User auf die Seite Zeiterfassung weitergeleitet werden.

@@ -10,29 +10,66 @@
 
 <div>
 	<form method="POST">
-		<label>Datum</label><input type="date" name="datum" placeholder="Datum"> <!-- ZUM ÄNDERN: value="{{ Datum }}" -->
-		<label>Startzeit</label><input type="time" name="startzeit" placeholder="Startzeit">
-		<label>Endzeit</label><input type="time" name="endzeit" placeholder="Endzeit">
-		<label>Pause in Min.</label><input type="number" min="0" step="1" name="pause" placeholder="20"><br>
-		<input type="checkbox" id="isolation" name="aufgabe" value="Isolation">
-			<label for="isolation"> Isolation</label><br>
-		<input type="checkbox" id="wandtaeferung" name="aufgabe" value="Wandtäferung">
-  			<label for="wandtaeferung"> Wandtäferung</label><br>
-		<input type="checkbox" id="fenster" name="aufgabe" value="Fenster">
-  			<label for="fenster"> Fenster</label><br>
-    	<input type="checkbox" id="<moebelbau>" name="aufgabe" value="Möbelbau">
-  			<label for="moebelbau"> Möbelbau</label><br>
-		<input type="checkbox" id="kueche" name="aufgabe" value="Küche">
-  			<label for="kueche"> Küche</label><br>
-    	<input type="checkbox" id="bad" name="aufgabe" value="Bad">
-  			<label for="bad"> Bad</label><br>
-		<input type="checkbox" id="sonstiges" name="aufgabe" value="Sonstiges">
-  			<label for="sonstiges"> Sonstiges</label><br>
+		<label>Datum</label><input type="date" name="datum" placeholder="Datum" required>
+		<label>Startzeit</label><input type="time" name="startzeit" placeholder="Startzeit" required>
+		<label>Endzeit</label><input type="time" name="endzeit" placeholder="Endzeit" required>
+		<label>Pause in Min.</label><input type="number" min="0" step="1" name="pause" placeholder="20" required><br>
+		<br>
+		<!-- Option 1 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="sonstiges" name="aufgabe" value="Sonstiges" checked>
+		  <label class="custom-control-label" for="sonstiges">Sonstiges</label>
+		</div>
+
+		<!-- Option 2 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="isolation" name="aufgabe" value="Isolation">
+		  <label class="custom-control-label" for="isolation">Isolation</label>
+		</div>
+
+		<!-- Option 3 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="wandtaeferung" name="aufgabe" value="Wandtäferung">
+		  <label class="custom-control-label" for="wandtaeferung">Wandtäferung</label>
+		</div>
+
+		<!-- Option 4 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="fenster" name="aufgabe" value="Fenster">
+		  <label class="custom-control-label" for="fenster">Fenster</label>
+		</div>
+
+		<!-- Option 5 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="moebel" name="aufgabe" value="Möbelbau">
+		  <label class="custom-control-label" for="moebel">Möbelbau</label>
+		</div>
+
+		<!-- Option 6 -->
+		<div class="custom-control custom-radio">
+		  <input type="radio" class="custom-control-input" id="kueche" name="aufgabe" value="Küche">
+		  <label class="custom-control-label" for="kueche">Küche</label>
+		</div>
+		<br>
+
 		<button type="submit">Hinzufügen</button>
+
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			<ul class=flashes>
+			{% for message in messages %}
+				<br><h6>{{ message }}</h6>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		{% endwith %}
+
 	</form>
 </div>
 
 {% endblock %}
 
-<!-- Quelle Formular: https://www.w3schools.com/html/html_form_input_types.asp -->
+<!-- Quellen:
+- https://www.w3schools.com/html/html_form_input_types.asp
+- https://mdbootstrap.com/docs/jquery/forms/radio-button/ -->
 

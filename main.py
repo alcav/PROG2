@@ -1,21 +1,21 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
+
 import funktionen
 
 app = Flask("TimeTool")
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
-    try:
-        if request.method == 'POST':  # Wenn User etwas im Formular eingibt.
-            datum = request.form['datum']  # Eingaben werden zu Variablen.
-            aufgabe = request.form['aufgabe']
-            startzeit = request.form['startzeit']
-            endzeit = request.form['endzeit']
-            pause = request.form['pause']
-            funktionen.neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
-    except:
-        print("Sie müssen zuerst etwas eingeben...")
+    if request.method == 'POST':  # Wenn User etwas im Formular eingibt.
+        datum = request.form['datum']  # Eingaben werden zu Variablen.
+        aufgabe = request.form['aufgabe']
+        startzeit = request.form['startzeit']
+        endzeit = request.form['endzeit']
+        pause = request.form['pause']
+        funktionen.neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause)
+        flash('Ihre Eingabe wurde gespeichert.')
     return render_template('index.html')
 
 
