@@ -19,7 +19,6 @@ def zeiterfassung_abspeichern(zeiterfassung): # Die Daten werden neu abgespeiche
         json.dump(zeiterfassung, open_file)  # json.dump() wandelt Python-Dictionarys bzw. Listen in Text in der JSON-Struktur um.
 
 
-
 def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
     zeiterfassung = erfasste_zeit_laden()
 
@@ -33,9 +32,11 @@ def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
 
     gesamtzeit = endzeit_obj - startzeit_obj - pause
 
-    zeiterfassung[datum] = aufgabe, str(gesamtzeit)
-
-    zeiterfassung_abspeichern(zeiterfassung)
+    if gesamtzeit < timedelta(0):
+        print("Konnte nicht gespeichert werden. Zeit muss grösser als 0 sein.")  # Wie kann ich diesen Satz bei index.html "flashen"???????????????
+    else:
+        zeiterfassung[datum] = aufgabe, str(gesamtzeit)
+        zeiterfassung_abspeichern(zeiterfassung)
 
 
 def zeiten_zusammenzaehlen():
