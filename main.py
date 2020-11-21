@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, flash
-
 import funktionen
 
 app = Flask("TimeTool")
@@ -27,6 +26,7 @@ def uebersicht():
 
 @app.route('/grafiken')
 def grafiken():
+    zeiten = funktionen.zeiten_zusammenzaehlen()
     return render_template('grafiken.html')
 
 

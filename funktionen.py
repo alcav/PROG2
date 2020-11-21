@@ -19,6 +19,7 @@ def zeiterfassung_abspeichern(zeiterfassung): # Die Daten werden neu abgespeiche
         json.dump(zeiterfassung, open_file)  # json.dump() wandelt Python-Dictionarys bzw. Listen in Text in der JSON-Struktur um.
 
 
+
 def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
     zeiterfassung = erfasste_zeit_laden()
 
@@ -31,8 +32,28 @@ def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
     pause = timedelta(minutes=int(pause))
 
     gesamtzeit = endzeit_obj - startzeit_obj - pause
-    gesamtzeit = str(gesamtzeit)
 
-    zeiterfassung[datum] = aufgabe, gesamtzeit
+    zeiterfassung[datum] = aufgabe, str(gesamtzeit)
 
     zeiterfassung_abspeichern(zeiterfassung)
+
+
+def zeiten_zusammenzaehlen():
+    zeiterfassung = erfasste_zeit_laden()
+
+    summe = timedelta(0)
+
+    aufgaben = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
+    for aufgabe in aufgaben:
+
+        for key, value in zeiterfassung.items():
+            if aufgabe in value:
+                einzelne_zeit = value[1]
+                einzelne_zeit_obj = datetime.strptime(einzelne_zeit, '%H:%M:%S')  # Umwandlung des Strings nach datetime
+                einzelne_zeit = timedelta(hours=einzelne_zeit_obj.hour, minutes=einzelne_zeit_obj.minute,
+                                          seconds=einzelne_zeit_obj.second)  # Umwandlung von datetime nach timedelta (damit Zeiten zusammengerechnet werden können)
+                summe += einzelne_zeit
+                print("Total " + aufgabe + ": " + str(summe))
+                summe = timedelta(0)
+
+zeiten_zusammenzaehlen()
