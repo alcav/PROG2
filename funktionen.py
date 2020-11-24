@@ -65,13 +65,8 @@ def zeiten_zusammenzaehlen():
                     kategorien_mit_zeit[kategorie] = summe.seconds  # Kategorie wird als Key, Anzahl Sekunden als Value in Dict gespeichert
                 summe = timedelta(0)
 
-    print(kategorien_mit_zeit)
-
     labels = list(kategorien_mit_zeit.keys())
     values = list(kategorien_mit_zeit.values())
-
-    print(labels)
-    print(values)
 
     return labels, values
 
