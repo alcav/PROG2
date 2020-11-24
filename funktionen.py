@@ -19,7 +19,7 @@ def zeiterfassung_abspeichern(zeiterfassung): # Die Daten werden neu abgespeiche
         json.dump(zeiterfassung, open_file)  # json.dump() wandelt Python-Dictionarys bzw. Listen in Text in der JSON-Struktur um.
 
 
-def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
+def neue_eingabe_speichern(datum, kategorie, startzeit, endzeit, pause):
     zeiterfassung = erfasste_zeit_laden()
 
     now = datetime.now()
@@ -33,28 +33,45 @@ def neue_eingabe_speichern(datum, aufgabe, startzeit, endzeit, pause):
     gesamtzeit = endzeit_obj - startzeit_obj - pause
 
     if gesamtzeit < timedelta(0):
-        print("Konnte nicht gespeichert werden. Zeit muss grösser als 0 sein.")  # Wie kann ich diesen Satz bei index.html "flashen"???????????????
+        return False
     else:
-        zeiterfassung[datum] = aufgabe, str(gesamtzeit)
+        zeiterfassung[datum] = kategorie, str(gesamtzeit)
         zeiterfassung_abspeichern(zeiterfassung)
+        return True
 
 
 def zeiten_zusammenzaehlen():
     zeiterfassung = erfasste_zeit_laden()
 
     summe = timedelta(0)
+    labels = []
+    values = []
 
-    aufgaben = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
-    for aufgabe in aufgaben:
+    kategorien = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
+    kategorien_mit_zeit = {}
 
+    for kategorie in kategorien:
         for key, value in zeiterfassung.items():
-            if aufgabe in value:
+            if kategorie in value:
                 einzelne_zeit = value[1]
                 einzelne_zeit_obj = datetime.strptime(einzelne_zeit, '%H:%M:%S')  # Umwandlung des Strings nach datetime
                 einzelne_zeit = timedelta(hours=einzelne_zeit_obj.hour, minutes=einzelne_zeit_obj.minute,
                                           seconds=einzelne_zeit_obj.second)  # Umwandlung von datetime nach timedelta (damit Zeiten zusammengerechnet werden können)
                 summe += einzelne_zeit
-                print("Total " + aufgabe + ": " + str(summe))
+                if kategorie in kategorien_mit_zeit:
+                    bisherige_zeit = kategorien_mit_zeit[kategorie]
+                    kategorien_mit_zeit[kategorie] = summe.seconds + bisherige_zeit
+                else:
+                    kategorien_mit_zeit[kategorie] = summe.seconds  # Kategorie wird als Key, Anzahl Sekunden als Value in Dict gespeichert
                 summe = timedelta(0)
 
-zeiten_zusammenzaehlen()
+    print(kategorien_mit_zeit)
+
+    labels = list(kategorien_mit_zeit.keys())
+    values = list(kategorien_mit_zeit.values())
+
+    print(labels)
+    print(values)
+
+    return labels, values
+

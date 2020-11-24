@@ -1,5 +1,6 @@
 h2 {margin: 50px 50px 25px 25px;}
 div, table, p {margin-left: 25px; margin-right: 25px;}
+table {width: 90%;}
 
 ul.flashes {
   list-style-type: none;

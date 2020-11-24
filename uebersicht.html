@@ -13,14 +13,14 @@
     <thead>
     <tr>
         <th scope="col">Datum, Erfassungszeit</th>
-        <th scope="col">Aufgabe</th>
+        <th scope="col">Kategorie</th>
         <th scope="col">Zeit</th>
         <th scope="col">Anpassen</th>
     </tr>
     </thead>
     {% for key, value in zeiterfassung.items() %}
     <tbody>
-    <tr>
+    <tr style="background-color:{{ farben_dict[value[0]] }}">
         <td>{{ key }}</td>
         <td>{{ value[0] }}</td>
         <td>{{ value[1] }}</td>
