@@ -27,9 +27,8 @@ def speichern():
 
 @app.route('/uebersicht')
 def uebersicht():
-    farben = {"Sonstiges": "#FA8258", "Fenster": "#F2F5A9", "Isolation": "#9FF781", "K\u00fcche": "#81F7F3", "M\u00f6belbau": "#BCA9F5", "Wandt\u00e4ferung": "#F5A9E1"}
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben_dict=farben)
+    return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
 
 
 @app.route('/grafiken')

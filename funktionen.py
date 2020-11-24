@@ -44,8 +44,6 @@ def zeiten_zusammenzaehlen():
     zeiterfassung = erfasste_zeit_laden()
 
     summe = timedelta(0)
-    labels = []
-    values = []
 
     kategorien = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
     kategorien_mit_zeit = {}
