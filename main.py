@@ -27,8 +27,9 @@ def speichern():
 
 @app.route('/uebersicht')
 def uebersicht():
+    farben = {"Isolation": "color:red", "Sonstiges": "color:blue"}
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
+    return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben_dict=farben)
 
 
 @app.route('/grafiken')
@@ -47,6 +48,30 @@ def loeschen(key=False):
         del zeiterfassung[key]
         funktionen.zeiterfassung_abspeichern(zeiterfassung)
         return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
+    else:
+        return render_template('uebersicht.html')
+
+
+@app.route('/aendern')
+@app.route('/aendern/<key>')
+def aendern(key=False):
+    if key:
+        zeiterfassung = funktionen.erfasste_zeit_laden()
+        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung)
+    else:
+        return render_template('uebersicht.html')
+
+
+@app.route('/speichern', methods=['GET', 'POST'])
+@app.route('/speichern/<key>', methods=['GET', 'POST'])
+def neu_speichern(key=False):
+    if key:
+        zeiterfassung = funktionen.erfasste_zeit_laden()
+        if request.method == 'POST':
+            neue_kategorie = request.form['neue_kategorie']
+            neue_zeit = request.form['neue_zeit']
+            zeiterfassung[key] = neue_kategorie, neue_zeit
+            zeiterfassung_abspeichern(zeiterfassung)
     else:
         return render_template('uebersicht.html')
 

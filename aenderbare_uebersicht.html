@@ -1,0 +1,53 @@
+{% extends "basic.html" %}
+
+{% block title %}
+<title>Ändern</title>
+{% endblock %}
+
+{% block body %}
+
+<h2>Erfasste Zeit ändern</h2>
+
+{% if zeiterfassung %} <!-- Falls Zeiten bereits erfasst wurden -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Datum, Erfassungszeit</th>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Zeit</th>
+            <th scope="col">Anpassen</th>
+        </tr>
+    </thead>
+{% for key, value in zeiterfassung.items() %}
+    <tbody>
+        <tr>
+            <td>{{ key }}</td>
+            <td><form method="POST">
+                    <div class="col-auto my-1">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="neue_kategorie">
+                                <option selected>{{ value[0]}}</option>
+                                <option value="1">Sonstiges</option>
+                                <option value="2">Isolation</option>
+                                <option value="3">Wandtäferung</option>
+                                <option value="4">Fenster</option>
+                                <option value="5">Möbelbau</option>
+                                <option value="6">Küche</option>
+                            </select>
+                </div>
+            </form></td>
+            <td><form method="POST">
+                 <input type="text" name="neue_zeit" placeholder="{{ value[1] }}">
+            </form></td>
+            <td><a href="/speichern/{{ key }}">Speichern</a></td>
+        </tr>
+    </tbody>
+{% endfor %}
+</table>
+
+{% else %}
+	<!-- Falls noch keine Zeiten erfasst wurden -->
+    <p>Es wurden noch keine Zeiten erfasst. Erfassen Sie Ihre Zeit <a href="/">hier</a>.</p>
+
+{% endif %}
+
+{% endblock %}
