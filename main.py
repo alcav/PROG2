@@ -57,7 +57,9 @@ def loeschen(key=False):
 def aendern(key=False):
     if key:
         zeiterfassung = funktionen.erfasste_zeit_laden()
-        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung)
+        eintrag_aendern = zeiterfassung[key]
+        key = key
+        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key)
     else:
         return render_template('uebersicht.html')
 
@@ -66,12 +68,13 @@ def aendern(key=False):
 @app.route('/speichern/<key>', methods=['GET', 'POST'])
 def neu_speichern(key=False):
     if key:
-        zeiterfassung = funktionen.erfasste_zeit_laden()
         if request.method == 'POST':
+            zeiterfassung = funktionen.erfasste_zeit_laden()
             neue_kategorie = request.form['neue_kategorie']
             neue_zeit = request.form['neue_zeit']
-            zeiterfassung[key] = neue_kategorie, neue_zeit
-            zeiterfassung_abspeichern(zeiterfassung)
+            zeiterfassung[key] = str(neue_kategorie), str(neue_zeit)
+            funktionen.zeiterfassung_abspeichern(zeiterfassung)
+            return render_template('uebersicht.html')
     else:
         return render_template('uebersicht.html')
 
