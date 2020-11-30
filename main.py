@@ -8,6 +8,14 @@ import plotly.graph_objects as go
 app = Flask("TimeTool")
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+kategorien_farben = {
+    "Isolation": "#F5F6CE",
+    "Wandtäferung": "#CEF6E3",
+    "Fenster": "#CEECF5",
+    "Möbelbau": "#F6CEF5",
+    "Küche": "#F6CED8",
+    "Sonstiges": "#F6D8CE"
+}
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
@@ -22,14 +30,13 @@ def speichern():
             flash('Ihre Eingabe wurde gespeichert.')
         else:
             flash('Ihre Eingabe konnte nicht gespeichert werden, da die Zeitsumme kleiner als 0 ist.')
-    return render_template('index.html')
+    return render_template('index.html', kategorien=kategorien_farben.keys())
 
 
 @app.route('/uebersicht')
 def uebersicht():
-    farben = {"Isolation": "color:red", "Sonstiges": "color:blue"}
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben_dict=farben)
+    return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
 
 
 @app.route('/grafiken')
@@ -47,7 +54,7 @@ def loeschen(key=False):
         zeiterfassung = funktionen.erfasste_zeit_laden()
         del zeiterfassung[key]
         funktionen.zeiterfassung_abspeichern(zeiterfassung)
-        return render_template('uebersicht.html', zeiterfassung=zeiterfassung)
+        return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
     else:
         return render_template('uebersicht.html')
 
@@ -59,7 +66,7 @@ def aendern(key=False):
         zeiterfassung = funktionen.erfasste_zeit_laden()
         eintrag_aendern = zeiterfassung[key]
         key = key
-        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key)
+        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key, farben=kategorien_farben)
     else:
         return render_template('uebersicht.html')
 

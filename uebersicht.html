@@ -20,7 +20,7 @@
     </thead>
 {% for key, value in zeiterfassung.items() %}
     <tbody>
-        <tr>
+        <tr style="background-color:{{ farben[value[0]] }}">
             <td>{{ key }}</td>
             <td>{{ value[0] }}</td>
             <td>{{ value[1] }}</td>

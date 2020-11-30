@@ -15,43 +15,15 @@
 		<label>Endzeit</label><input type="time" name="endzeit" placeholder="Endzeit" required>
 		<label>Pause in Min.</label><input type="number" min="0" step="1" name="pause" placeholder="20" required><br>
 		<br>
-		<!-- Option 1 -->
-		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="sonstiges" name="kategorie" value="Sonstiges" checked>
-		  <label class="custom-control-label" for="sonstiges">Sonstiges</label>
-		</div>
 
-		<!-- Option 2 -->
+		{% for kategorie in kategorien %}
 		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="isolation" name="kategorie" value="Isolation">
-		  <label class="custom-control-label" for="isolation">Isolation</label>
+		  <input type="radio" class="custom-control-input" id="{{ kategorie }}" name="kategorie" value="{{ kategorie }}" checked>
+		  <label class="custom-control-label" for="{{ kategorie }}">{{ kategorie }}</label>
 		</div>
+		{% endfor %}
 
-		<!-- Option 3 -->
-		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="wandtaeferung" name="kategorie" value="Wandtäferung">
-		  <label class="custom-control-label" for="wandtaeferung">Wandtäferung</label>
-		</div>
-
-		<!-- Option 4 -->
-		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="fenster" name="kategorie" value="Fenster">
-		  <label class="custom-control-label" for="fenster">Fenster</label>
-		</div>
-
-		<!-- Option 5 -->
-		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="moebel" name="kategorie" value="Möbelbau">
-		  <label class="custom-control-label" for="moebel">Möbelbau</label>
-		</div>
-
-		<!-- Option 6 -->
-		<div class="custom-control custom-radio">
-		  <input type="radio" class="custom-control-input" id="kueche" name="kategorie" value="Küche">
-		  <label class="custom-control-label" for="kueche">Küche</label>
-		</div>
 		<br>
-
 		<button type="submit">Hinzufügen</button>
 
 		{% with messages = get_flashed_messages() %}
