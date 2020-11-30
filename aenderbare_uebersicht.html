@@ -25,12 +25,9 @@
                     <div class="col-auto my-1">
                         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="neue_kategorie">
                                 <option selected>{{ eintrag_aendern[0] }}</option>
-                                <option value="1">Sonstiges</option>
-                                <option value="2">Isolation</option>
-                                <option value="3">Wandtäferung</option>
-                                <option value="4">Fenster</option>
-                                <option value="5">Möbelbau</option>
-                                <option value="6">Küche</option>
+                                {% for kategorie in kategorien %}
+                                <option value="1">{{ kategorie }}</option>
+                                {% endfor %}
                             </select>
                 </div>
             </form></td>

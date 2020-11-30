@@ -66,7 +66,7 @@ def aendern(key=False):
         zeiterfassung = funktionen.erfasste_zeit_laden()
         eintrag_aendern = zeiterfassung[key]
         key = key
-        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key, farben=kategorien_farben)
+        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key, farben=kategorien_farben, kategorien=kategorien_farben.keys())
     else:
         return render_template('uebersicht.html')
 
