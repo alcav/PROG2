@@ -7,7 +7,7 @@ Mein Freund und ich bauen einen Kastenwagen zu einem Camper um. Um die Übersich
 Das TimeTool soll es erlauben die geleisteten Arbeitsstunden zu erfassen. Es soll schlussendlich eine Übersicht angezeigt werden, die alle bereits erfassten Arbeitzeiten darstellt. Die Übersicht soll das Datum, die Art der Arbeit und die Arbeitszeit beinhalten. Des Weiteren soll es auch möglich sein, bereits erfasste Arbeitsstunden wieder zu löschen oder anzupassen. Schlussendlich sollen die erfassten Daten grafisch dargestellt werden können.
 
 ## Workflow
-Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden. Bei der Erfassung wird das Datum, die Startzeit, die Endzeit sowie die Pause in Minuten eingetragen. Zudem wird mittels Checkbox ausgewählt, woran gearbeitet wurde. Die Auswahloptionen sind Isolation, Wandtäferung, Fenster, Möbelbau, Küche oder Sonstiges. Mit Klick auf dem Button "Hinzufügen" werden die Eingaben gespeichert und es wird eine entsprechende Bestätigung ausgegeben. Die Eingabe wird nicht gespeichert, wenn die Zeitsumme kleiner als 0 ist. In diesem Fall wird eine entsprechende Meldung ausgegeben. Im Register Übersicht werden sämtliche bereits erfassten Daten ausgegeben und es ist möglich, einzelne Arbeitsstunden zu löschen oder anzupassen. Im Register Grafiken können die erfassten Daten grafisch ausgegeben werden.
+Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden. Bei der Erfassung wird das Datum, die Startzeit, die Endzeit sowie die Pause in Minuten eingetragen. Zudem wird mittels Checkbox ausgewählt, woran gearbeitet wurde. Die Auswahloptionen sind Isolation, Wandtäferung, Fenster, Möbelbau, Küche oder Sonstiges. Mit Klick auf dem Button "Hinzufügen" werden die Eingaben gespeichert und es wird eine entsprechende Bestätigung ausgegeben. Die Eingabe wird nicht gespeichert, wenn die Zeitsumme kleiner als 0 ist. In diesem Fall wird eine entsprechende Meldung ausgegeben. Im Register Übersicht werden sämtliche bereits erfassten Daten ausgegeben und es ist möglich, einzelne Arbeitsstunden zu löschen oder anzupassen. Im Register Grafik können die erfassten Daten grafisch ausgegeben werden.
 
 ## Funktionsbeschrieb
 
@@ -19,7 +19,7 @@ Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden.
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung verbleiben.
 - Durch das Klicken auf den Button "Zeiterfassung" soll der User auf die Seite Zeiterfassung verbleiben.
 - Durch das Klicken auf den Button "Übersicht" soll der User auf die Seite Übersicht weitergeleitet werden. 
-- Durch das Klicken auf den Button "Grafiken" soll der User auf die Seite Grafiken weitergeleitet werden.
+- Durch das Klicken auf den Button "Grafik" soll der User auf die Seite Grafik weitergeleitet werden.
 
 ### Seite Übersicht
 - Die Übersicht soll alle bereits erfassten Daten darstellen. Für jede Zeiterfassung wird das Datum, die Erfassungzeit, die Aufgabe und die Arbeitszeit angezeigt. Die Arbeitszeit soll die totale Arbeitszeit pro Zeiterfassung sein, d.h. Endzeit abzgl. Anfangszeit abzgl. Pause. Die Arbeitszeit soll in Stunden und Minuten dargestellt werden.
@@ -28,16 +28,14 @@ Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden.
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung weitergeleitet werden.
 - Durch das Klicken auf den Button "Zeiterfassung" soll der User auf die Seite Zeiterfassung weitergeleitet werden.
 - Durch das Klicken auf den Button "Übersicht" soll der User auf die Seite Übersicht verbleiben. 
-- Durch das Klicken auf den Button "Grafiken" soll der User auf die Seite Grafiken weitergeleitet werden.
+- Durch das Klicken auf den Button "Grafik" soll der User auf die Seite Grafik weitergeleitet werden.
 
-### Seite Grafiken
+### Seite Grafik
 - Mittels eines Kuchendiagramms kann eingesehen werden, wie viel % man woran gearbeitet hat. Alle sechs Kategorien Isolation, Wandtäferung, Fenster, Möbelbau, Küche und Sonstiges sind im Diagramm enthalten.
-- 
--
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung weitergeleitet werden.
 - Durch das Klicken auf den Button "Zeiterfassung" soll der User auf die Seite Zeiterfassung weitergeleitet werden.
 - Durch das Klicken auf den Button "Übersicht" soll der User auf die Seite Übersicht weitergeleitet werden. 
-- Durch das Klicken auf den Button "Grafiken" soll der User auf die Seite Grafiken verbleiben.
+- Durch das Klicken auf den Button "Grafik" soll der User auf die Seite Grafik verbleiben.
 
 
 ## Ablaufdiagramm

@@ -39,12 +39,12 @@ def uebersicht():
     return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
 
 
-@app.route('/grafiken')
-def grafiken():
+@app.route('/grafik')
+def grafik():
     labels, values = funktionen.zeiten_zusammenzaehlen()
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
     div = plotly.io.to_html(fig, include_plotlyjs=True, full_html=False)
-    return render_template('grafiken.html', plotly_div=div)
+    return render_template('grafik.html', plotly_div=div)
 
 
 @app.route('/loeschen')
@@ -59,21 +59,9 @@ def loeschen(key=False):
         return render_template('uebersicht.html')
 
 
-@app.route('/aendern')
-@app.route('/aendern/<key>')
+@app.route('/aendern', methods=['GET', 'POST'])
+@app.route('/aendern/<key>', methods=['GET', 'POST'])
 def aendern(key=False):
-    if key:
-        zeiterfassung = funktionen.erfasste_zeit_laden()
-        eintrag_aendern = zeiterfassung[key]
-        key = key
-        return render_template('aenderbare_uebersicht.html', zeiterfassung=zeiterfassung, eintrag_aendern=eintrag_aendern, key = key, farben=kategorien_farben, kategorien=kategorien_farben.keys())
-    else:
-        return render_template('uebersicht.html')
-
-
-@app.route('/speichern', methods=['GET', 'POST'])
-@app.route('/speichern/<key>', methods=['GET', 'POST'])
-def neu_speichern(key=False):
     if key:
         if request.method == 'POST':
             zeiterfassung = funktionen.erfasste_zeit_laden()
@@ -81,9 +69,16 @@ def neu_speichern(key=False):
             neue_zeit = request.form['neue_zeit']
             zeiterfassung[key] = str(neue_kategorie), str(neue_zeit)
             funktionen.zeiterfassung_abspeichern(zeiterfassung)
-            return render_template('uebersicht.html')
-    else:
-        return render_template('uebersicht.html')
+            return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
+        else:
+            zeiterfassung = funktionen.erfasste_zeit_laden()
+            eintrag_aendern = zeiterfassung[key]
+            return render_template('aenderbare_uebersicht.html',
+                                   zeiterfassung=zeiterfassung,
+                                   eintrag_aendern=eintrag_aendern,
+                                   farben=kategorien_farben,
+                                   key = key,
+                                   kategorien=kategorien_farben.keys())
 
 
 if __name__ == "__main__":
