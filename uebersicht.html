@@ -9,6 +9,19 @@
 <h2>Übersicht erfasste Zeit</h2>
 
 {% if zeiterfassung %} <!-- Falls Zeiten bereits erfasst wurden -->
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Filtern nach Kategorie
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% for kategorie in kategorien %}
+    <a class="dropdown-item" href="/uebersicht/{{ kategorie }}">{{ kategorie }}</a>
+      {% endfor %}
+  </div>
+</div>
+<br>
+
 <table class="table">
     <thead>
         <tr>

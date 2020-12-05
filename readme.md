@@ -23,6 +23,8 @@ Im Register Zeiterfassung können die geleisteten Arbeitsstunden erfasst werden.
 
 ### Seite Übersicht
 - Die Übersicht soll alle bereits erfassten Daten darstellen. Für jede Zeiterfassung wird das Datum, die Erfassungzeit, die Aufgabe und die Arbeitszeit angezeigt. Die Arbeitszeit soll die totale Arbeitszeit pro Zeiterfassung sein, d.h. Endzeit abzgl. Anfangszeit abzgl. Pause. Die Arbeitszeit soll in Stunden und Minuten dargestellt werden.
+- Der Nutzer soll die Möglichkeit haben, die erfassten Daten nach Kategorien zu filtern. Wenn er mit der Filterfunktion eine Kategorie auswählt, soll nur die erfasste Arbeitszeit in dieser Kategorie angezeigt werden.
+- ZEITEN ZUSAMMENZAEHLEN
 - Falls noch keine Zeiten erfasst wurden, erscheint eine entsprechende Meldung mit der Aufforderung, die Zeit auf der Seite Zeiterfassung einzugeben.
 - Es soll es dem User möglich sein, durch das Klicken auf den Button "Löschen" bereits erfasste Daten zu löschen und durch das Klicken auf den Button "Ändern" bereits erfasste Daten zu ändern. Sowohl die Kategorie als auch die Gesamtzeit können geändert werden.
 - Durch das Klicken auf den Button "TimeTool" soll der User auf die Seite Zeiterfassung weitergeleitet werden.

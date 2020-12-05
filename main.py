@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, flash
 import funktionen
-import plotly.express as px
 import plotly
 import plotly.graph_objects as go
-
 
 app = Flask("TimeTool")
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -36,7 +34,10 @@ def speichern():
 @app.route('/uebersicht')
 def uebersicht():
     zeiterfassung = funktionen.erfasste_zeit_laden()
-    return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
+    return render_template('uebersicht.html',
+                           zeiterfassung=zeiterfassung,
+                           farben=kategorien_farben,
+                           kategorien=kategorien_farben.keys())
 
 
 @app.route('/grafik')
