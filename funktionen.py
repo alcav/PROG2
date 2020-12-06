@@ -1,70 +1,72 @@
 import json
 from datetime import datetime, timedelta
 
+# datetime = Kombination aus Datum und Zeit
+# timedelta = Dauer der Differenz zwischen zwei Daten, Zeiten oder Datetime Objekten
 
-def erfasste_zeit_laden(): # Die .json Datei wird geöffnet (read) oder neu erstellt.
+def erfasste_zeit_laden(): # Die .json Datei wird geöffnet (read) oder neu erstellt
     try:
-        with open("zeiterfassung.json", "r") as open_file:  # Wenn die Datei "zeiterfassung.json" vorhanden ist, wird sie geöffnet.
-            zeiterfassung = json.load(open_file)  # json.load wandelt den Text in der JSON-Struktur in Python-Dictionarys bzw. Listen um.
-    except FileNotFoundError:
-        zeiterfassung = {}  # Wenn noch keine Datei "zeiterfassung.json" vorhanden ist, wird ein leeres Dict erstellt.
-    except json.decoder.JSONDecodeError:
+        with open("zeiterfassung.json", "r") as open_file:  # Wenn die Datei "zeiterfassung.json" vorhanden ist, wird sie geöffnet
+            zeiterfassung = json.load(open_file)  # Json.load wandelt den Text in der JSON-Struktur in Python-Dictionarys bzw. Listen um
+    except FileNotFoundError:  # Fehlermeldung wenn noch keine Datei "zeiterfassung.json" vorhanden ist
+        zeiterfassung = {}  # Neues, leeres Dict wird erstellt
+    except json.decoder.JSONDecodeError:  # Fehlermeldung wenn .json Datei ungültig sein sollte
         print("Die Datei scheint leer oder ungültig zu sein.")
         zeiterfassung = {}
-    return zeiterfassung
+    return zeiterfassung  # Der geöffnete Dict heisst zeiterfassung
 
 
-def zeiterfassung_abspeichern(zeiterfassung): # Die Daten werden neu abgespeichert.
-    with open("zeiterfassung.json", "w") as open_file:  # "zeiterfassung.json" wird im Schreibmodus geöffnet.
-        json.dump(zeiterfassung, open_file)  # json.dump() wandelt Python-Dictionarys bzw. Listen in Text in der JSON-Struktur um.
+def zeiterfassung_abspeichern(zeiterfassung): # Die Daten werden neu abgespeichert
+    with open("zeiterfassung.json", "w") as open_file:  # "Zeiterfassung.json" wird im Schreibmodus geöffnet, d.h. überschrieben
+        json.dump(zeiterfassung, open_file)  # Json.dump() wandelt Python-Dictionarys bzw. Listen in Text in der JSON-Struktur um
 
 
-def neue_eingabe_speichern(datum, kategorie, startzeit, endzeit, pause):
-    zeiterfassung = erfasste_zeit_laden()
+def neue_eingabe_speichern(datum, kategorie, startzeit, endzeit, pause):  # Die Variablen aus main.py werden übernommen
+    zeiterfassung = erfasste_zeit_laden()  # Die bereits erfassten Zeiten werden geladen (siehe Funktion oben)
 
     now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    datum = datum + ", " + current_time
+    current_time = now.strftime("%H:%M:%S")  # Strftime wandelt datetime object in string um
+    datum = datum + ", " + current_time  # Durch die Erweiterung mit der aktuellen Zeit wird sichergestellt, dass der spätere Key einzigartig ist
 
-    startzeit_obj = datetime.strptime(startzeit, '%H:%M')
+    startzeit_obj = datetime.strptime(startzeit, '%H:%M') # Strptime wandelt string in datetime object um
     endzeit_obj = datetime.strptime(endzeit, '%H:%M')
-    pause = timedelta(minutes=int(pause))
+    pause = timedelta(minutes=int(pause)) # Die Pause wird in Minuten umgewandelt
 
     gesamtzeit = endzeit_obj - startzeit_obj - pause
 
     if gesamtzeit < timedelta(0):
-        return False
+        return False  # Wenn die Gesamtzeit kleiner als 0 ist, wird eine Fehlermeldung ausgegeben (siehe main.py)
     else:
-        zeiterfassung[datum] = kategorie, str(gesamtzeit)
-        zeiterfassung_abspeichern(zeiterfassung)
-        return True
+        zeiterfassung[datum] = kategorie, str(gesamtzeit)  # Ein neuer Eintrag wird im Dict abgespeichert
+        zeiterfassung_abspeichern(zeiterfassung)  # Der Dict wird im json abgespeichert (siehe Funktion oben)
+        return True  # Eine Bestätigung wird ausgegeben (siehe main.py)
 
 
 def zeiten_zusammenzaehlen():
-    zeiterfassung = erfasste_zeit_laden()
+    zeiterfassung = erfasste_zeit_laden()  # Die bereits erfassten Zeiten werden geladen (siehe Funktion oben)
 
-    summe = timedelta(0)
+    summe = timedelta(0)  # Die Summe wird auf 0 gesetzt
 
     kategorien = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
-    kategorien_mit_zeit = {}
+    kategorien_mit_zeit = {}  # Ein leeres Dict wird erstellt
 
     for kategorie in kategorien:
         for key, value in zeiterfassung.items():
-            if kategorie in value:
-                einzelne_zeit = value[1]
+            if kategorie in value:  # Wenn die Kategorie im Dict vorhanden ist
+                einzelne_zeit = value[1]  # Value[1] = zugehörige Zeit
                 einzelne_zeit_obj = datetime.strptime(einzelne_zeit, '%H:%M:%S')  # Umwandlung des Strings nach datetime
                 einzelne_zeit = timedelta(hours=einzelne_zeit_obj.hour, minutes=einzelne_zeit_obj.minute,
                                           seconds=einzelne_zeit_obj.second)  # Umwandlung von datetime nach timedelta (damit Zeiten zusammengerechnet werden können)
-                summe += einzelne_zeit
-                if kategorie in kategorien_mit_zeit:
-                    bisherige_zeit = kategorien_mit_zeit[kategorie]
-                    kategorien_mit_zeit[kategorie] = summe.seconds + bisherige_zeit
+                summe += einzelne_zeit  # Die einzelne_zeit wird aktualisiert
+                if kategorie in kategorien_mit_zeit:  # Wenn die Kategorie bereits im Dict vorhanden ist...
+                    bisherige_zeit = kategorien_mit_zeit[kategorie]  # ... wird der Eintrag geöffnet ...
+                    kategorien_mit_zeit[kategorie] = summe.seconds + bisherige_zeit  # und aktualisiert (bisherige Zeit + neue Zeit in Sekunden)
                 else:
-                    kategorien_mit_zeit[kategorie] = summe.seconds  # Kategorie wird als Key, Anzahl Sekunden als Value in Dict gespeichert
-                summe = timedelta(0)
+                    kategorien_mit_zeit[kategorie] = summe.seconds  # Wenn die Kategorie noch nicht im Dict ist: Kategorie wird als Key, Anzahl Sekunden als Value in Dict gespeichert
+                summe = timedelta(0)  # Die Summe wird wieder auf 0 gesetzt und die Schleife beginnt von vorne
 
-    labels = list(kategorien_mit_zeit.keys())
+    labels = list(kategorien_mit_zeit.keys())  # Variablen für die grafische Darstellung (siehe main.py)
     values = list(kategorien_mit_zeit.values())
 
-    return labels, values
+    return labels, values # Variablen werden an main.py weitergegeben
 

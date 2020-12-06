@@ -4,7 +4,7 @@ import plotly
 import plotly.graph_objects as go
 
 app = Flask("TimeTool")
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' # Wird für flash benötigt
 
 kategorien_farben = {
     "Isolation": "#F5F6CE",
@@ -17,8 +17,8 @@ kategorien_farben = {
 
 @app.route('/', methods=['GET', 'POST'])
 def speichern():
-    if request.method == 'POST':  # Wenn User etwas im Formular eingibt.
-        datum = request.form['datum']  # Eingaben werden zu Variablen.
+    if request.method == 'POST':  # Wenn User etwas im Formular (siehe index.html) eingibt
+        datum = request.form['datum']  # Eingaben werden zu Variablen
         kategorie = request.form['kategorie']
         startzeit = request.form['startzeit']
         endzeit = request.form['endzeit']
@@ -50,11 +50,11 @@ def grafik():
 
 @app.route('/loeschen')
 @app.route('/loeschen/<key>')
-def loeschen(key=False):
+def loeschen(key=False):  # WIESO HIER KEY FALSE???????????????????????????????????
     if key:
-        zeiterfassung = funktionen.erfasste_zeit_laden()
-        del zeiterfassung[key]
-        funktionen.zeiterfassung_abspeichern(zeiterfassung)
+        zeiterfassung = funktionen.erfasste_zeit_laden()  # Die .json Einträge werden als Dict geladen
+        del zeiterfassung[key]  # Der entsprechende Eintrag wird aus dem Dict gelöscht
+        funktionen.zeiterfassung_abspeichern(zeiterfassung)  # Der Dict wird in .json abgespeichert
         return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
     else:
         return render_template('uebersicht.html')
@@ -64,19 +64,19 @@ def loeschen(key=False):
 @app.route('/aendern/<key>', methods=['GET', 'POST'])
 def aendern(key=False):
     if key:
-        if request.method == 'POST':
+        if request.method == 'POST':  # Wenn User etwas in Formular (siehe aenderbare_uebersicht.html) eingibt
             zeiterfassung = funktionen.erfasste_zeit_laden()
-            neue_kategorie = request.form['neue_kategorie']
+            neue_kategorie = request.form['neue_kategorie']  # Eingaben werden zu Variablen
             neue_zeit = request.form['neue_zeit']
-            zeiterfassung[key] = str(neue_kategorie), str(neue_zeit)
+            zeiterfassung[key] = str(neue_kategorie), str(neue_zeit)  # Der Eintrag im Dictionary wird aktualisiert
             funktionen.zeiterfassung_abspeichern(zeiterfassung)
             return render_template('uebersicht.html', zeiterfassung=zeiterfassung, farben=kategorien_farben)
-        else:
+        else:  # Wenn Formular noch nicht ausgefüllt wurde, also request.method nicht gleich POST
             zeiterfassung = funktionen.erfasste_zeit_laden()
-            eintrag_aendern = zeiterfassung[key]
+            aenderbare_kategorie = zeiterfassung[key]  # Die Werte zum angewählten Schlüssel werden zur Variablen anderbare_kategorie
             return render_template('aenderbare_uebersicht.html',
                                    zeiterfassung=zeiterfassung,
-                                   eintrag_aendern=eintrag_aendern,
+                                   aenderbare_kategorie=aenderbare_kategorie,  # Diese Variable wird an das .html Format weitergegeben
                                    farben=kategorien_farben,
                                    key = key,
                                    kategorien=kategorien_farben.keys())

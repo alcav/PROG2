@@ -2,6 +2,7 @@
 
 {% block title %}
 <title>Übersicht</title>
+
 {% endblock %}
 
 {% block body %}
@@ -11,15 +12,18 @@
 {% if zeiterfassung %} <!-- Falls Zeiten bereits erfasst wurden -->
 
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Filtern nach Kategorie
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for kategorie in kategorien %}
-    <a class="dropdown-item" href="/uebersicht/{{ kategorie }}">{{ kategorie }}</a>
-      {% endfor %}
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li>
+      <li><a href="#">jQuery</a></li>
+      <li><a href="#">Bootstrap</a></li>
+      <li><a href="#">Angular</a></li>
+    </ul>
   </div>
-</div>
 <br>
 
 <table class="table">
@@ -31,13 +35,13 @@
             <th scope="col">Anpassen</th>
         </tr>
     </thead>
-{% for key, value in zeiterfassung.items() %}
+{% for key, value in zeiterfassung.items() %}  <!-- For-Schleife iteriert durch den Dict -->
     <tbody>
-        <tr style="background-color:{{ farben[value[0]] }}">
-            <td>{{ key }}</td>
-            <td>{{ value[0] }}</td>
-            <td>{{ value[1] }}</td>
-            <td><a href="/aendern/{{ key }}">Ändern</a> <a href="/loeschen/{{ key }}">Löschen</a></td>
+        <tr style="background-color:{{ farben[value[0]] }}">  <!-- Jede Kategorie hat eigene Hintergrundfarbe -->
+            <td>{{ key }}</td>  <!-- Key = Datum, Erfassungszeit -->
+            <td>{{ value[0] }}</td>  <!-- Value[0] = Kategorie -->
+            <td>{{ value[1] }}</td>  <!-- Value[1] = Zeit -->
+            <td><a href="/aendern/{{ key }}">Ändern</a> <a href="/loeschen/{{ key }}">Löschen</a></td>  <!-- Key kommt aus main.py -->
         </tr>
     </tbody>
 {% endfor %}

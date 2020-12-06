@@ -19,16 +19,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr style="background-color:{{ farben[eintrag_aendern[0]] }}">
+        <tr style="background-color:{{ farben[aenderbare_kategorie[0]] }}">  <!-- Die Hintergrundfarbe ist diejenige der gewählten Kategorie -->
             <td>{{ key }}</td>
             <td><form method="POST">
                 <select name="neue_kategorie">
-                    <option selected>{{ eintrag_aendern[0] }}</option>
+                    <option selected>{{ aenderbare_kategorie[0] }}</option>  <!-- Die gewählte Kategorie ist als Option vorgewählt -->
                     {% for kategorie in kategorien %}
-                    <option value="{{ kategorie }}">{{ kategorie }}</option>
+                    <option value="{{ kategorie }}">{{ kategorie }}</option>  <!-- Alle Kategorien werden als Optionen im Dropdown aufgeführt -->
                     {% endfor %}
                 </select></td>
-            <td><input type="text" name="neue_zeit" placeholder="{{ eintrag_aendern[1] }}" required></td>
+            <td><input type="text" name="neue_zeit" placeholder="{{ aenderbare_kategorie[1] }}" required></td>  <!-- Die bereits erfasste Zeit ist als Option gewählt -->
             <td><button type="submit">Speichern</button></td></form>
         </tr>
     </tbody>

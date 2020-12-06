@@ -1,3 +1,5 @@
+<!-- Dies ist das Skelett der .html Dateien -->
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -11,7 +13,7 @@
 		{% block title %}{% endblock %}
 	</head>
 
-	<body>
+	<body> <!-- Navigation -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <a class="navbar-brand" href="/">TimeTool</a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +33,8 @@
 			</ul>
 		  </div>
 		</nav>
-	<!-- Quelle Navbar: https://getbootstrap.com/docs/4.1/components/navbar/ -->
-
 	{% block body %}{% endblock %}
 	</body>
 </html>
+
+<!-- Quelle Navbar: https://getbootstrap.com/docs/4.1/components/navbar/ -->
