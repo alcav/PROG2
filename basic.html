@@ -8,8 +8,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		{% block title %}{% endblock %}
 	</head>
 
@@ -35,6 +33,12 @@
 		</nav>
 	{% block body %}{% endblock %}
 	</body>
+
+	<footer>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</footer>
 </html>
 
+<!-- Quelle Template Inheritance: https://www.youtube.com/watch?v=sAxuqMB7eUY -->
 <!-- Quelle Navbar: https://getbootstrap.com/docs/4.1/components/navbar/ -->

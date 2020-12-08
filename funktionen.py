@@ -47,18 +47,18 @@ def zeiten_zusammenzaehlen():
 
     summe = timedelta(0)  # Die Summe wird auf 0 gesetzt
 
-    kategorien = ["Sonstiges", "Isolation", "Wandt\u00e4ferung", "Fenster", "M\u00f6belbau", "K\u00fcche"]
+    kategorien = ["Sonstiges", "Isolation", "Wandtäferung", "Fenster", "Möbelbau", "Küche"]
     kategorien_mit_zeit = {}  # Ein leeres Dict wird erstellt
 
     for kategorie in kategorien:
         for key, value in zeiterfassung.items():
-            if kategorie in value:  # Wenn die Kategorie im Dict vorhanden ist
+            if kategorie in value:  # Wenn die Kategorie im Dict zeiterfassung vorhanden ist
                 einzelne_zeit = value[1]  # Value[1] = zugehörige Zeit
                 einzelne_zeit_obj = datetime.strptime(einzelne_zeit, '%H:%M:%S')  # Umwandlung des Strings nach datetime
                 einzelne_zeit = timedelta(hours=einzelne_zeit_obj.hour, minutes=einzelne_zeit_obj.minute,
                                           seconds=einzelne_zeit_obj.second)  # Umwandlung von datetime nach timedelta (damit Zeiten zusammengerechnet werden können)
                 summe += einzelne_zeit  # Die einzelne_zeit wird aktualisiert
-                if kategorie in kategorien_mit_zeit:  # Wenn die Kategorie bereits im Dict vorhanden ist...
+                if kategorie in kategorien_mit_zeit:  # Wenn die Kategorie bereits im Dict kategorien_mit_zeit vorhanden ist...
                     bisherige_zeit = kategorien_mit_zeit[kategorie]  # ... wird der Eintrag geöffnet ...
                     kategorien_mit_zeit[kategorie] = summe.seconds + bisherige_zeit  # und aktualisiert (bisherige Zeit + neue Zeit in Sekunden)
                 else:
@@ -68,5 +68,20 @@ def zeiten_zusammenzaehlen():
     labels = list(kategorien_mit_zeit.keys())  # Variablen für die grafische Darstellung (siehe main.py)
     values = list(kategorien_mit_zeit.values())
 
+    print(kategorien_mit_zeit)
+
     return labels, values # Variablen werden an main.py weitergegeben
+
+
+def zeiterfassung_filtern(gefilterte_kategorie):
+    zeiterfassung = erfasste_zeit_laden()  # Die bereits erfassten Zeiten werden geladen (siehe Funktion oben)
+
+    dict_gefiltert = {}  # Ein leeres Dict wird erstellt
+
+    for key, value in zeiterfassung.items():
+        if gefilterte_kategorie in value:
+            dict_gefiltert[key] = value
+        elif gefilterte_kategorie == "Alle":
+            dict_gefiltert = zeiterfassung
+    return dict_gefiltert
 
